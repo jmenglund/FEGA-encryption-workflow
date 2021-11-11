@@ -1,0 +1,3 @@
+inputDir: path/to/directory
+privateKeyFile: null  # null or path/to/file
+recipientPublicKeyFile: path/to/file
