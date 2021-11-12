@@ -20,23 +20,22 @@ else:
     PRIVATE_KEY_COMMMAND = ""
 
 
-def get_list_of_files(dir, base_path):
+def get_list_of_files(dir_path, base_path):
     """
     List paths to all files in the directory, including files in
     subdirectories (but not the subdirectories themselves).
 
     Parameters
     ----------
-
-    dir : str
-        Directory for which all contained files should be listed.
+    dir_path : str
+        Path to directory for which all contained files should be listed.
     base_path : str
         Base path for constructing relative paths.
     """
-    file_entries = os.listdir(dir)
+    file_entries = os.listdir(dir_path)
     all_files = list()
     for entry in file_entries:
-        full_path = os.path.join(dir, entry)
+        full_path = os.path.join(dir_path, entry)
         if os.path.isdir(full_path):
             all_files = all_files + get_list_of_files(full_path, base_path)
         else:
