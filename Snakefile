@@ -67,10 +67,10 @@ rule encrypt_file:
 rule calculate_unencrypted_checksum:
     input: config["inputDir"] + "/{filename}"
     output: "results/{filename}.md5"
-    shell: MD5_COMMAND + """ {input} | awk "{{ print \$1 }}" > {output}"""
+    shell: MD5_COMMAND + " {input} > {output}"
 
 
 rule calculate_encrypted_checksum:
     input: "results/{filename}.c4gh"
     output: "results/{filename}.c4gh.md5"
-    shell: MD5_COMMAND + """ {input} | awk "{{ print \$1 }}" > {output}"""
+    shell: MD5_COMMAND + " {input} > {output}"
