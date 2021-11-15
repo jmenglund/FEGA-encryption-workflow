@@ -1,7 +1,7 @@
 # FEGA-SE encryption workflow
 
 A Snakemake workflow for encrypting files before uploading them to the Swedish
-node of the Federated European Genome-Phenome Archive](FEGA-SE).
+node of the Federated European Genome-Phenome Archive (FEGA-SE).
 
 The workflow will produce FEGA-SE compliant encrypted files along with files
 for the encrypted and unencrypted [MD5 checksums](https://en.wikipedia.org/wiki/MD5)
