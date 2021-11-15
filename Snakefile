@@ -43,34 +43,34 @@ def get_list_of_files(dir_path, base_path):
     return all_files
 
 
-INPUT_FILES = get_list_of_files(config["inputDir"], config["inputDir"])
+INPUT_PATHS = get_list_of_files(config["inputDir"], config["inputDir"])
 
 
 rule all:
     input:
         expand(
-            "results/{filename}.{format}",
-            filename=INPUT_FILES, format=["c4gh", "md5", "c4gh.md5"])
+            "results/{relpath}.{format}",
+            relpath=INPUT_PATHS, format=["c4gh", "md5", "c4gh.md5"])
 
 
 rule encrypt_file:
     input:
         config["recipientPublicKeyFile"],
-        config["inputDir"] + "/{filename}"
+        config["inputDir"] + "/{relpath}"
     output:
-        "results/{filename}.c4gh"
+        "results/{relpath}.c4gh"
     shell:
         "crypt4gh encrypt" + PRIVATE_KEY_COMMMAND
         + " --recipient_pk {input[0]} < {input[1]} > {output}"
 
 
 rule calculate_unencrypted_checksum:
-    input: config["inputDir"] + "/{filename}"
-    output: "results/{filename}.md5"
+    input: config["inputDir"] + "/{relpath}"
+    output: "results/{relpath}.md5"
     shell: MD5_COMMAND + " {input} > {output}"
 
 
 rule calculate_encrypted_checksum:
-    input: "results/{filename}.c4gh"
-    output: "results/{filename}.c4gh.md5"
+    input: "results/{relpath}.c4gh"
+    output: "results/{relpath}.c4gh.md5"
     shell: MD5_COMMAND + " {input} > {output}"
